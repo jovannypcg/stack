@@ -1,9 +1,7 @@
 require 'stack'
 
 describe Stack do
-  subject(:stack) do
-    Stack.new
-  end
+  subject(:stack) { Stack.new }
 
   after { stack.clear }
 
@@ -19,43 +17,42 @@ describe Stack do
     end
   end
 
-  describe '#pop' do
+  context "when retrieving item" do
     before do
-      stack.push(1)
-      stack.push(9)
-      stack.push(2)
-      stack.push(8)
+      (1 .. 10).each { |num| stack.push(num) }
     end
 
-    it 'retrieves last item and removes it' do
-      expect(stack.size).to eql(4)
+    describe '#pop' do
+      it 'retrieves item and removes it' do
+        expect(stack.size).to eql(10)
 
-      value = stack.pop
-      expect(value).to eql(8)
-      expect(stack.size).to eql(3)
+        value = stack.pop
+        expect(value).to eql(10)
+        expect(stack.size).to eql(9)
+      end
+
+      # Should not this example raises an error?
+      it "returns 'nil' when stack is empty" do
+        value = stack.pop
+
+        expect(value).to be_nil
+      end
     end
 
-    # Should not this example raises an error?
-    it "returns 'nil' when stack is empty" do
-      value = stack.pop
+    describe '#poll' do
+      it 'retrieves item without removing it' do
+        expect(stack.size).to eql(4)
 
-      expect(value).to be nil
-    end
-  end
+        value = stack.poll
 
-  describe '#poll' do
-    it 'retrieves last item without removing it' do
-      expect(stack.size).to eql(4)
+        expect(value).to eql(8)
+        expect(stack.size).to eql(4)
+      end
 
-      value = stack.poll
-
-      expect(value).to eql(8)
-      expect(stack.size).to eql(4)
-    end
-
-    # Should not this example raises an error?
-    it "returns 'nil' when stack is empty" do
-      expect(stack.poll).to be nil
+      # Should not this example raises an error?
+      it "returns 'nil' when stack is empty" do
+        expect(stack.poll).to be_nil
+      end
     end
   end
 
@@ -67,8 +64,14 @@ describe Stack do
   end
 
   describe '#.size' do
+    it 'returns 0 when recently instantiated' do
+      expect(stack.size).to eql(0)
+    end
+
     it 'returns 3' do
       3.times { stack.push(Object.new) }
+
+      expect(stack.size).to eql(3)
     end
   end
 end

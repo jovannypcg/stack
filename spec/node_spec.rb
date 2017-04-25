@@ -5,9 +5,9 @@ describe Node do
   let(:next_node) { Node.new }
   let(:data_sample) { Object.new }
 
-  after { node.next = nil; node.data = nil; node.head = nil }
+  after { node.next = nil; node.data = nil }
 
-  describe '#.next' do
+  describe '#next' do
     it 'responds' do
       is_expected.to respond_to(:next)
     end
@@ -25,13 +25,13 @@ describe Node do
     end
   end
 
-  describe '#.next=' do
+  describe '#next=' do
     it 'responds' do
       is_expected.to respond_to(:next=)
     end
   end
 
-  describe '#.data' do
+  describe '#data' do
     it 'responds' do
       is_expected.to respond_to(:data)
     end
@@ -49,7 +49,7 @@ describe Node do
     end
   end
 
-  describe '#.data=' do
+  describe '#data=' do
     it 'responds' do
       is_expected.to respond_to(:data=)
     end
